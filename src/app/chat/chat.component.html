@@ -1,7 +1,12 @@
 <div class="chat-c">
   <div #messagesContainer class="messages-c">
     <div class="message-c" *ngFor="let message of messages">
-      {{ message }}
+      <div class="message-sender">
+        Anonymous
+      </div>
+      <div class="message-body">
+        {{ message }}
+      </div>
     </div>
   </div>
   <div class="message-input-c">

@@ -21,18 +21,26 @@
     }
 
     > .message-c {
-      background: #558aec;
-      color: white;
-      font-family: cursive;
-      border: none;
-      padding: 10px;
-      border-radius: 7px;
-      max-width: 200px;
-      width: fit-content;
-      overflow-wrap: break-word;
+      > .message-sender {
+        font-size: 13px;
+        color: #535353;
+        padding-left: 4px;
+      }
 
       &:not(:first-child) {
         margin-top: 10px;
+      }
+
+      > .message-body {
+        background: #558aec;
+        color: white;
+        font-family: cursive;
+        border: none;
+        padding: 10px;
+        border-radius: 7px;
+        max-width: 200px;
+        width: fit-content;
+        overflow-wrap: break-word;
       }
     }
   }
