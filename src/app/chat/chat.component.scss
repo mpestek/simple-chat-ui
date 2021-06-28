@@ -6,8 +6,8 @@
 
   > .messages-c {
     padding: 13px;
-    min-height: 400px;
-    max-height: 400px;
+    min-height: calc(100vh - 150px);
+    max-height: calc(100vh - 150px);
     flex: 1;
     overflow-y: auto;
 
