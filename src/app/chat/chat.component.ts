@@ -25,7 +25,6 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.ngZone.runOutsideAngular(() => {
       this.connection.on('ReceiveMessage', message => {
         this.ngZone.run(() => {
-          console.log('hagara');
           this.messages.push(message);
           console.log('Messages: ', this.messages);
           setTimeout(() => this.messagesContainer.nativeElement.scrollBy(0, 99999));

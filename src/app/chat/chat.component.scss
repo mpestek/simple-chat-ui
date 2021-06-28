@@ -9,7 +9,16 @@
     min-height: 400px;
     max-height: 400px;
     flex: 1;
-    overflow-y: scroll;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+
+      &-thumb {
+        background-color: #558aec;
+        border-radius: 15px;
+      }
+    }
 
     > .message-c {
       background: #558aec;
