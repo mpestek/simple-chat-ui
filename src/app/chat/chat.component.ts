@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, DoCheck, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { DetailedMessage } from './detailed-message.dto';
 import * as signalR from '@microsoft/signalr';
 
 @Component({
@@ -8,14 +9,15 @@ import * as signalR from '@microsoft/signalr';
 })
 export class ChatComponent implements OnInit, OnDestroy {
   @ViewChild('messageContent') messageInput: ElementRef<HTMLInputElement>;
+  @ViewChild('nicknameInput') nicknameInput: ElementRef<HTMLInputElement>;
   @ViewChild('messagesContainer') messagesContainer: ElementRef<HTMLDivElement>;
   connection: signalR.HubConnection;
 
-  messages: string[] = [];
+  messages: DetailedMessage[] = [];
 
   constructor(
-    private cdr: ChangeDetectorRef,
-    private ngZone: NgZone) {}
+    private ngZone: NgZone
+  ) {}
 
   ngOnInit(): void {
     this.connection = new signalR.HubConnectionBuilder()
@@ -23,26 +25,23 @@ export class ChatComponent implements OnInit, OnDestroy {
       .build();
 
     this.ngZone.runOutsideAngular(() => {
-      this.connection.on('ReceiveMessage', message => {
+      this.connection.on('ReceiveDetailedMessage', message => {
         this.ngZone.run(() => {
           this.messages.push(message);
-          console.log('Messages: ', this.messages);
+          console.log('Message: ', message);
           setTimeout(() => this.messagesContainer.nativeElement.scrollBy(0, 99999));
         });
       });
-      this.connection.start().then(() => console.log('Connection with chat server established.'));
+      this.connection.start().then(() =>
+        console.log('Connection with chat server ESTABLISHED.')
+      );
     })
   }
 
   sendMessage(messageContent: string): void {
-    this.connection.invoke('SendMessage', messageContent);
-    this.messageInput.nativeElement.value = '';
-  }
-
-  sendDetailedMessage(): void {
     this.connection.invoke('SendDetailedMessage', {
-      sender: 'Mesud',
-      body: 'Some message body'
+      sender: this.nicknameInput.nativeElement.value,
+      body: this.messageInput.nativeElement.value
     });
     this.messageInput.nativeElement.value = '';
   }

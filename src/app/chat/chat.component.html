@@ -1,27 +1,35 @@
-<div class="chat-c">
-  <div #messagesContainer class="messages-c">
-    <div class="message-c" *ngFor="let message of messages">
-      <div class="message-sender">
-        Anonymous
-      </div>
-      <div class="message-body">
-        {{ message }}
+<div class="left-col">
+  <mat-form-field appearance="outline">
+    <mat-label>Nickname</mat-label>
+    <input matInput #nicknameInput value="Anonymous">
+  </mat-form-field>
+</div>
+<div class="right-col">
+  <div class="chat-c">
+    <div #messagesContainer class="messages-c">
+      <div class="message-c" *ngFor="let message of messages">
+        <div class="message-sender">
+          {{ message.sender }}
+        </div>
+        <div class="message-body">
+          {{ message.body }}
+        </div>
       </div>
     </div>
-  </div>
-  <div class="message-input-c">
-    <form class="message-form" (submit)="$event.preventDefault(); sendMessage(messageContent.value)">
-      <input
-        placeholder="Aa..."
-        class="message-input"
-        #messageContent
-        type="text">
-      <button
-        class="send-btn"
-        mat-mini-fab
-        color="primary">
-        <mat-icon>send</mat-icon>
-      </button>
-    </form>
+    <div class="message-input-c">
+      <form class="message-form" (submit)="$event.preventDefault(); sendMessage()">
+        <input
+          placeholder="Aa..."
+          class="message-input"
+          #messageContent
+          type="text">
+        <button
+          class="send-btn"
+          mat-mini-fab
+          color="primary">
+          <mat-icon>send</mat-icon>
+        </button>
+      </form>
+    </div>
   </div>
 </div>
