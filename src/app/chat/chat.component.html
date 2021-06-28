@@ -1,0 +1,22 @@
+<div class="chat-c">
+  <div #messagesContainer class="messages-c">
+    <div class="message-c" *ngFor="let message of messages">
+      {{ message }}
+    </div>
+  </div>
+  <div class="message-input-c">
+    <form class="message-form" (submit)="$event.preventDefault(); sendMessage(messageContent.value)">
+      <input
+        placeholder="Aa..."
+        class="message-input"
+        #messageContent
+        type="text">
+      <button
+        class="send-btn"
+        mat-mini-fab
+        color="primary">
+        <mat-icon>send</mat-icon>
+      </button>
+    </form>
+  </div>
+</div>
